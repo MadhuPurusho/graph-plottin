@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graph Fitter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>Graph Fitter</h1>
+
+      <section class="section">
+        <h2>Mode</h2>
+        <div class="mode-toggle">
+          <button id="modePoints" class="mode-btn active">Plot Points</button>
+          <button id="modeFunction" class="mode-btn">Function</button>
+        </div>
+      </section>
+
+      <section class="section" id="pointsPanel">
+        <h2>Add Point</h2>
+        <div class="input-row">
+          <label>X
+            <div class="input-wrap">
+              <input id="inputX" type="text" placeholder="0" autocomplete="off" />
+              <button class="kbd-toggle" data-target="inputX" title="Math keyboard">⌨</button>
+            </div>
+          </label>
+          <label>Y
+            <div class="input-wrap">
+              <input id="inputY" type="text" placeholder="0" autocomplete="off" />
+              <button class="kbd-toggle" data-target="inputY" title="Math keyboard">⌨</button>
+            </div>
+          </label>
+        </div>
+        <button id="btnAdd">Add Point</button>
+      </section>
+
+      <section class="section" id="functionPanel" style="display:none">
+        <h2>Function  y = f(x)</h2>
+        <div class="input-wrap fx-wrap">
+          <span class="fx-label">y =</span>
+          <input id="inputFn" type="text" placeholder="sin(x) * x" autocomplete="off" />
+          <button class="kbd-toggle" data-target="inputFn" title="Math keyboard">⌨</button>
+        </div>
+        <div class="input-row small-row">
+          <label>x min <input id="fnXMin" type="text" value="-10" /></label>
+          <label>x max <input id="fnXMax" type="text" value="10" /></label>
+        </div>
+        <button id="btnPlotFn">Plot Function</button>
+        <div id="fnError" class="fn-error"></div>
+      </section>
+
+      <div id="mathKeyboard" class="math-keyboard" style="display:none">
+        <div class="kbd-row">
+          <button class="kbd-btn sym" data-insert="π">π</button>
+          <button class="kbd-btn sym" data-insert="φ">φ</button>
+          <button class="kbd-btn sym" data-insert="e">e</button>
+          <button class="kbd-btn sym" data-insert="∞">∞</button>
+          <button class="kbd-btn op"  data-insert="sqrt(">√</button>
+          <button class="kbd-btn op"  data-insert="cbrt(">∛</button>
+          <button class="kbd-btn op"  data-insert="abs(">|x|</button>
+          <button class="kbd-btn op"  data-insert="^2">x²</button>
+          <button class="kbd-btn op"  data-insert="^3">x³</button>
+          <button class="kbd-btn op"  data-insert="^(">xⁿ</button>
+        </div>
+        <div class="kbd-row">
+          <button class="kbd-btn fn" data-insert="sin(">sin</button>
+          <button class="kbd-btn fn" data-insert="cos(">cos</button>
+          <button class="kbd-btn fn" data-insert="tan(">tan</button>
+          <button class="kbd-btn fn" data-insert="asin(">sin⁻¹</button>
+          <button class="kbd-btn fn" data-insert="acos(">cos⁻¹</button>
+          <button class="kbd-btn fn" data-insert="atan(">tan⁻¹</button>
+          <button class="kbd-btn fn" data-insert="sinh(">sinh</button>
+          <button class="kbd-btn fn" data-insert="cosh(">cosh</button>
+          <button class="kbd-btn fn" data-insert="tanh(">tanh</button>
+          <button class="kbd-btn fn" data-insert="log(">log</button>
+        </div>
+        <div class="kbd-row">
+          <button class="kbd-btn fn" data-insert="ln(">ln</button>
+          <button class="kbd-btn fn" data-insert="exp(">eˣ</button>
+          <button class="kbd-btn fn" data-insert="floor(">⌊x⌋</button>
+          <button class="kbd-btn fn" data-insert="ceil(">⌈x⌉</button>
+          <button class="kbd-btn fn" data-insert="round(">round</button>
+          <button class="kbd-btn fn" data-insert="sign(">sign</button>
+          <button class="kbd-btn fn" data-insert="max(">max</button>
+          <button class="kbd-btn fn" data-insert="min(">min</button>
+          <button class="kbd-btn op" data-insert="(">( </button>
+          <button class="kbd-btn op" data-insert=")"> )</button>
+        </div>
+        <div class="kbd-row">
+          <button class="kbd-btn num" data-insert="7">7</button>
+          <button class="kbd-btn num" data-insert="8">8</button>
+          <button class="kbd-btn num" data-insert="9">9</button>
+          <button class="kbd-btn op"  data-insert="/">÷</button>
+          <button class="kbd-btn op"  data-insert="*">×</button>
+          <button class="kbd-btn op"  data-insert="-">−</button>
+          <button class="kbd-btn op"  data-insert="+">+</button>
+          <button class="kbd-btn op"  data-insert="%">%</button>
+          <button class="kbd-btn op"  data-insert="x">x</button>
+          <button class="kbd-btn del" id="kbdBackspace">⌫</button>
+        </div>
+        <div class="kbd-row">
+          <button class="kbd-btn num" data-insert="4">4</button>
+          <button class="kbd-btn num" data-insert="5">5</button>
+          <button class="kbd-btn num" data-insert="6">6</button>
+          <button class="kbd-btn num" data-insert="1">1</button>
+          <button class="kbd-btn num" data-insert="2">2</button>
+          <button class="kbd-btn num" data-insert="3">3</button>
+          <button class="kbd-btn num num-wide" data-insert="0">0</button>
+          <button class="kbd-btn num" data-insert=".">.</button>
+          <button class="kbd-btn num" data-insert="-">±</button>
+          <button class="kbd-btn ok"  id="kbdDone">OK</button>
+        </div>
+      </div>
+
+      <section class="section" id="pointsListPanel">
+        <h2>Points <span id="pointCount">(0)</span></h2>
+        <ul id="pointList"></ul>
+        <button id="btnClear" class="danger">Clear All</button>
+      </section>
+
+      <section class="section">
+        <h2>Fit Type</h2>
+        <select id="fitType">
+          <option value="auto">Auto (Best Fit)</option>
+          <optgroup label="Polynomial">
+            <option value="linear">Linear  y = ax + b</option>
+            <option value="poly2">Quadratic  y = ax² + bx + c</option>
+            <option value="poly3">Cubic  y = ax³ + …</option>
+            <option value="poly4">Degree 4 Polynomial</option>
+            <option value="poly5">Degree 5 Polynomial</option>
+          </optgroup>
+          <optgroup label="Transcendental">
+            <option value="exponential">Exponential  y = ae^(bx)</option>
+            <option value="logarithmic">Logarithmic  y = a·ln(x) + b</option>
+            <option value="power">Power  y = ax^b</option>
+            <option value="sinusoidal">Sinusoidal  y = a·sin(bx+c)+d</option>
+            <option value="cosinusoidal">Cosinusoidal  y = a·cos(bx+c)+d</option>
+            <option value="tangential">Tangential  y = a·tan(bx+c)+d</option>
+          </optgroup>
+          <optgroup label="Other">
+            <option value="hyperbolic">Hyperbolic  y = a/x + b</option>
+            <option value="sqrt">Square Root  y = a√x + b</option>
+            <option value="absolute">Absolute  y = a|x+b|+c</option>
+            <option value="gaussian">Gaussian  y = a·e^(-((x-b)/c)²)</option>
+          </optgroup>
+        </select>
+        <button id="btnFit">Fit Curve</button>
+      </section>
+
+      <section class="section">
+        <h2>Audio</h2>
+        <div class="audio-controls">
+          <button id="btnPlay" class="play-btn" disabled>&#9654; Play</button>
+          <button id="btnStop" class="stop-btn" disabled>&#9646;&#9646; Stop</button>
+        </div>
+        <div class="audio-row">
+          <label>Speed
+            <select id="audioSpeed">
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+              <option value="4">4×</option>
+            </select>
+          </label>
+          <label>Volume
+            <input id="audioVolume" type="range" min="0" max="1" step="0.05" value="0.5" />
+          </label>
+        </div>
+        <div id="audioStatus" class="audio-status"></div>
+      </section>
+
+      <section class="section">
+        <h2>View</h2>
+        <div class="view-btns">
+          <button id="btnZoomIn" title="Zoom in">＋</button>
+          <button id="btnZoomOut" title="Zoom out">－</button>
+          <button id="btnReset" title="Reset view">⌂ Reset</button>
+        </div>
+      </section>
+
+      <section class="section result" id="resultSection" style="display:none">
+        <h2>Result</h2>
+        <div id="resultType" class="tag"></div>
+        <div id="resultEq" class="equation"></div>
+        <div id="resultR2" class="r2"></div>
+      </section>
+    </aside>
+
+    <main class="chart-area">
+      <canvas id="graph"></canvas>
+      <div class="coords-label" id="coordsLabel"></div>
+    </main>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
