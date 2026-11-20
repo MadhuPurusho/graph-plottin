@@ -6,6 +6,13 @@ import SwiftUI
 struct GraphPlottingMainApp: App {
     @State private var appState = AppState()
 
+    init() {
+        NSApplication.shared.setActivationPolicy(.regular)
+        DispatchQueue.main.async {
+            NSApplication.shared.activate(ignoringOtherApps: true)
+        }
+    }
+
     var body: some Scene {
         WindowGroup("Graph Plotting 2.0") {
             ContentView()
