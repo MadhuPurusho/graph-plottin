@@ -1,0 +1,4 @@
+module GraphPlottingCoreFFI {
+    header "graph_plotting_coreFFI.h"
+    export *
+}

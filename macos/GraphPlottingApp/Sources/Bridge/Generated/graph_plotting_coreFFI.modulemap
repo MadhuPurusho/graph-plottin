@@ -1,0 +1,7 @@
+module graph_plotting_coreFFI {
+    header "graph_plotting_coreFFI.h"
+    export *
+    use "Darwin"
+    use "_Builtin_stdbool"
+    use "_Builtin_stdint"
+}

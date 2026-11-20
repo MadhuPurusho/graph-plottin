@@ -1,0 +1,26 @@
+[package]
+name = "graph_plotting_core"
+version = "0.1.0"
+edition = "2021"
+default-run = "uniffi-bindgen"
+
+[lib]
+crate-type = ["lib", "staticlib"]
+name = "graph_plotting_core"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+
+[dependencies]
+nalgebra = "0.34"
+levenberg-marquardt = "0.15.0"
+uniffi = { version = "0.32.2", features = ["cli"] }
+rayon = "1.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+rand = "0.8"
+
+[build-dependencies]
+uniffi = { version = "0.32.2", features = ["build"] }
