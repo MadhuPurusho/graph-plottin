@@ -15,6 +15,10 @@ Scientific integrity requires precise delimitation of an analytical tool's opera
 - **Not a Black-Box Machine Learning Framework**: It does not train deep neural networks, decision forests, or non-parametric kernel methods. Every supported model represents an explicit, interpretable closed-form equation with physical or geometric meaning.
 - **Not an Automated Global Optimization Prover**: It cannot mathematically guarantee that a converged non-linear regression solution is the global minimum of the parameter space.
 
+<p align="center">
+  <img src="images/functions_mode.png" alt="Interactive Univariate Function Visualization" width="880">
+</p>
+
 ---
 
 ## 2. Non-Convex Optimization and Local Minima Vulnerability

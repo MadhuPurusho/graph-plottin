@@ -138,3 +138,7 @@ swift test
 ```
 
 All contributions must maintain zero test failures and zero compiler warnings under Swift 6 strict concurrency before landing.
+
+<p align="center">
+  <img src="images/export_sheet.png" alt="Vector and LaTeX Publication Export Modal" width="750">
+</p>

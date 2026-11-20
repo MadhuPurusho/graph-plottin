@@ -9,6 +9,10 @@ final class InteractiveMTKView: MTKView {
     private var trackingAreaRef: NSTrackingArea?
     private var lastMousePoint: CGPoint?
 
+    override var intrinsicContentSize: NSSize {
+        NSSize(width: 700, height: 500)
+    }
+
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
         if let existing = trackingAreaRef {

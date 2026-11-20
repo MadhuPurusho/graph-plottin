@@ -27,6 +27,10 @@ Graph Plotting 2.0 is designed as a bifurcated scientific computing platform. It
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
+<p align="center">
+  <img src="images/app_overview.png" alt="Graph Plotting 2.0 Architectural UI Layout" width="900">
+</p>
+
 The system design enforces four foundational non-negotiables:
 
 1. **Total Isolation of Numerical State**: All mathematical computations—expression tokenization, Pratt parsing, bytecode compilation, interval-arithmetic tessellation, non-linear optimization, Jacobian derivation, and cross-validation—are executed strictly inside the Rust numerical engine (`rust/graph-plotting-core`). No mathematical approximations or heuristic estimations occur within the UI layer.
@@ -159,6 +163,10 @@ The pipeline establishes four distinct render states:
    - The fragment shader computes an exact circle SDF with an analytical anti-aliased border ring:
      $$d = \|\mathbf{p}_{\text{local}}\| - r$$
      Pixels where $d > 0$ are discarded via `discard_fragment()`.
+
+<p align="center">
+  <img src="images/calculus_inspector.png" alt="Metal Graphics Canvas and Calculus Diagnostics" width="880">
+</p>
 
 ---
 

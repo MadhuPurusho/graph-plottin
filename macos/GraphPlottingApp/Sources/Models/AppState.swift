@@ -48,6 +48,24 @@ final class AppState {
     // MARK: - Rendering
     var needsRedraw: Bool = true
 
+    init() {
+        let samplePoints: [(Double, Double)] = [
+            (-4.0, 16.2), (-3.0, 9.1), (-2.0, 4.05), (-1.0, 1.1),
+            (0.0, 0.05), (1.0, 1.02), (2.0, 3.98), (3.0, 8.95), (4.0, 15.9)
+        ]
+        self.points = samplePoints.map { DataPoint(x: $0.0, y: $0.1) }
+        self.selectedFitType = .quadratic
+        self.viewport = ViewportState(xMin: -6.0, xMax: 6.0, yMin: -2.0, yMax: 18.0)
+        self.showInspector = true
+        self.expressions = [
+            ExpressionEntry(source: "sin(x) * cos(x/2)", color: .blue),
+            ExpressionEntry(source: "x^2 - 4", isVisible: false, color: .orange)
+        ]
+        Task {
+            self.fitData()
+        }
+    }
+
     enum InspectorTab: String, CaseIterable {
         case diagnostics = "Diagnostics"
         case calculus = "Calculus"

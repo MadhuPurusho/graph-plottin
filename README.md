@@ -8,6 +8,10 @@
 
 Graph Plotting 2.0 is a native macOS scientific computing application designed for empirical non-linear regression, mathematical function exploration, and publication-grade figure generation. It combines a mathematically rigorous numerical engine implemented in pure Rust with a 120 FPS ProMotion Metal rendering pipeline and a native SwiftUI interface conforming to Apple's Human Interface Guidelines and Liquid Glass design system.
 
+<p align="center">
+  <img src="docs/images/app_overview.png" alt="Graph Plotting 2.0 Native macOS Interface" width="920">
+</p>
+
 ---
 
 ## Technical Documentation Index
@@ -66,10 +70,23 @@ The system implements exact analytical and Levenberg-Marquardt optimization rout
 - **Topological Interval Tessellation**: Uses Moore interval arithmetic ($[a, b]$) to isolate poles ($\tan x, \frac{1}{x}$) and domain cuts ($\ln x, \sqrt{x}$), eliminating vertical jump artifacts across discontinuities.
 - **Numerical Calculus**: Brent-Dekker hybrid root finding ($f(x)=0$), critical point local extrema classification ($f'(x)=0$ with $f''(x)$ sign test), and adaptive 15-point Gauss-Kronrod quadrature ($G_7/K_{15}$) for definite integration $\int_a^b f(x)dx$.
 
-### 3. ProMotion Metal Graphics Architecture
+<p align="center">
+  <img src="docs/images/functions_mode.png" alt="Function Plotting Mode with Multi-Expression Editor" width="880">
+</p>
+
+<p align="center">
+  <img src="docs/images/calculus_inspector.png" alt="Calculus Inspector and Root-Finding Diagnostics" width="880">
+</p>
+
+### 3. ProMotion Metal Graphics Architecture & Publication Export
 - **120 FPS Event-Driven Canvas**: Operates with `MTKView.isPaused = true` and `enableSetNeedsDisplay = true`, consuming zero GPU energy when idle.
 - **Metal Shading Language Pipelines**: Fullscreen signed distance field (SDF) grid ($1\text{–}2\text{–}5 \times 10^k$ decade scaling), anti-aliased polyline strips, confidence band triangle strips, and instanced circle billboard markers.
 - **Natural Trackpad Interaction**: Seamless inertial 2-finger panning, cursor-centered pinch-to-zoom, and magnetic probe snapping to curve vertices within 20 screen pixels.
+- **Vector Publication Export**: Delivers publication-grade SVG with styled grid layers, vector LaTeX/TikZ code with PGFPlots formatting, uncompressed high-DPI raster PNGs, CSV/TSV matrices, and native `.gplot` project files.
+
+<p align="center">
+  <img src="docs/images/export_sheet.png" alt="Publication Export Modal" width="720">
+</p>
 
 ---
 

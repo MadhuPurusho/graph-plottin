@@ -8,8 +8,13 @@ struct GraphPlottingMainApp: App {
 
     init() {
         NSApplication.shared.setActivationPolicy(.regular)
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             NSApplication.shared.activate(ignoringOtherApps: true)
+            if let window = NSApplication.shared.windows.first {
+                window.setContentSize(NSSize(width: 1280, height: 800))
+                window.center()
+                window.makeKeyAndOrderFront(nil)
+            }
         }
     }
 
@@ -17,7 +22,9 @@ struct GraphPlottingMainApp: App {
         WindowGroup("Graph Plotting 2.0") {
             ContentView()
                 .environment(appState)
+                .frame(minWidth: 1000, minHeight: 650)
         }
+        .defaultSize(width: 1280, height: 800)
         .commands {
             CommandGroup(after: .sidebar) {
                 Button("Toggle Sidebar") {

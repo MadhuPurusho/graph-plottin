@@ -108,6 +108,10 @@ Available Idle Budget                 7960 µs                95.56%
 
 *Finding*: Total GPU pipeline overhead consumes less than 5% of the 120 Hz frame budget (8.33 ms), leaving 95% of thermal and power capacity unburdened, maintaining a low-power, zero-thermal-throttling footprint.
 
+<p align="center">
+  <img src="images/app_overview.png" alt="Hardware-Accelerated 120 FPS Metal Interactive Canvas" width="900">
+</p>
+
 ---
 
 ## 4. Robust Regression Validation: Huber Outlier Resistance

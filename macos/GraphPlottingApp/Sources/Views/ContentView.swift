@@ -18,6 +18,8 @@ struct ContentView: View {
         } detail: {
             ZStack {
                 MetalGraphView()
+                    .frame(minWidth: 500, minHeight: 400)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
 
                 overlays
@@ -28,6 +30,7 @@ struct ContentView: View {
             }
         }
         .navigationSplitViewStyle(.balanced)
+        .frame(minWidth: 1050, idealWidth: 1280, minHeight: 650, idealHeight: 800)
         .sheet(isPresented: $state.showExportSheet) {
             ExportView()
                 .environment(appState)
@@ -38,6 +41,7 @@ struct ContentView: View {
         .toolbar {
             toolbarContent
         }
+        .background(WindowAccessor())
     }
 
     // MARK: - Overlays
@@ -141,4 +145,19 @@ struct ContentView: View {
         }
         return false
     }
+}
+
+private struct WindowAccessor: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            if let window = view.window {
+                window.setContentSize(NSSize(width: 1280, height: 800))
+                window.center()
+                window.makeKeyAndOrderFront(nil)
+            }
+        }
+        return view
+    }
+    func updateNSView(_ nsView: NSView, context: Context) {}
 }

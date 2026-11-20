@@ -8,6 +8,10 @@ $$S(\boldsymbol{\theta}) = \sum_{i=1}^n \rho\left(y_i - f(x_i; \boldsymbol{\thet
 
 where $\rho(r) = \frac{1}{2}r^2$ under ordinary least squares (OLS), and $f(x; \boldsymbol{\theta})$ represents one of the following 15 explicit model formulations.
 
+<p align="center">
+  <img src="images/app_overview.png" alt="Empirical Curve Fitting and Working-Hotelling Confidence Bands" width="900">
+</p>
+
 ---
 
 ### 1.1 Polynomial Family (Degree $d \in \{1, 2, 3, 4, 5\}$)
@@ -272,6 +276,10 @@ Given a viewport domain $[x_{\min}, x_{\max}]$:
 ---
 
 ## 6. Numerical Calculus Engines
+
+<p align="center">
+  <img src="images/calculus_inspector.png" alt="Numerical Calculus and Root Finding Subsystem" width="880">
+</p>
 
 ### 6.1 Hybrid Brent-Dekker Root Finding
 Finds solutions to $f(x) = 0$ on $[a, b]$ where $f(a)f(b) \le 0$. The algorithm combines:
